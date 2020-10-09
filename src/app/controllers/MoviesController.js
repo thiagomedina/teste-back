@@ -21,13 +21,13 @@ class MoviesController {
     }
 
     const checkIsAdmin = await User.findOne({
-      where: { id: req.userId, admin: true },
+      where: { id: req.userId, admin: true, status: true },
     });
 
     if (!checkIsAdmin) {
       return res
         .status(401)
-        .json({ error: 'only administrator can register movies' });
+        .json({ error: 'only administrator actived can register movies' });
     }
 
     const { name, director, genre } = req.body;
