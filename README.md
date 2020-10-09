@@ -9,7 +9,7 @@
 - **`GET /sessions`**: A rota para fazer o login, envie o `email` e `password` como basic authentication(base64);
 
 
-- **`PUT /users`**: A rota  altera o `name`,`email`, `password`, `admin: true` ou `admin:false`, caso deseje trocar a senha, basta enviar o `oldPassword` seguindo do `password` e `confirmPassword`.
+- **`PUT /users`**: A rota  altera o `name`,`email`, `password`, `admin: true` ou `admin:false`, caso queira trocar a senha, basta enviar o `oldPassword` seguindo do `password` e `confirmPassword`.
 
 ----
 
