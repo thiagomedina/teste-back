@@ -20,7 +20,9 @@
 **OBS**: Você precisa estar logado e ser um usuário administrador.
 
 
-- **`GET /movies`**: A Rota retorna todos o filmes cadastrados já com a média de notas do filme.<br/> 
+- **`GET /movies`**: A Rota retorna todos o filmes cadastrados já com a média de notas do filme, também é possível filtrar por gênero, diretor ou nome do filme, passando a query na url `?name=exemplo&genre=drama`.<br/> 
+
+
 
 
 - **`PUT /movies/vote/:movie_id`**: A rota recebe seu voto e contabiliza na média do filme, você só precisa passar `id`do filme na url e o `movie_note:` com o valor da sua nota no corpo da requisição. <br/> 
