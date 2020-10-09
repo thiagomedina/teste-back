@@ -11,18 +11,19 @@
 
 - **`PUT /users`**: A rota  altera o `name`,`email`, `password`, `admin: true` ou `admin:false`, caso queira trocar a senha, basta enviar o `oldPassword` seguindo do `password` e `confirmPassword`.
 
+
+- **`PUT /users/disable`**: A rota desabilita o usuário da aplicação, é preciso estar logado.
+
 ----
 
-- **`POST /movies`**: A rota cadastra um novo filme recebendo `name` e `description`<br/> 
+- **`POST /movies`**: A rota cadastra um novo filme recebendo `name`,`director` e ` genre`<br/> 
 **OBS**: Você precisa estar logado e ser um usuário administrador.
 
 
 - **`GET /movies`**: A Rota retorna todos o filmes cadastrados já com a média de notas do filme.<br/> 
-**OBS**: Você precisa estar logado.
 
 
 - **`PUT /movies/vote/:movie_id`**: A rota recebe seu voto e contabiliza na média do filme, você só precisa passar `id`do filme na url e o `movie_note:` com o valor da sua nota no corpo da requisição. <br/> 
-**OBS**: Você precisa estar logado.
 
 
 ----
