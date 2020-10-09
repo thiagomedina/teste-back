@@ -4,16 +4,32 @@ import Movie from '../models/Movie';
 import User from '../models/User';
 class MoviesController {
   async index(req, res) {
-    
-    const data = await Movie.findAll();
-    return res.status(200).json(data);
+    try {
+      let filter = {};
+      req.query.name ? (filter.name = req.query.name) : null;
+      req.query.director ? (filter.director = req.query.director) : null;
+      req.query.genre ? (filter.genre = req.query.genre) : null;
+
+      const result = await Movie.findAll({
+        where: filter,
+      });
+
+      if (result) {
+         return res.status(200).json(result);
+      } 
+
+      const data = await Movie.findAll();
+      return res.status(200).json(data);
+    } catch (e) {
+      return res.status(401).json({ error: 'Movie not found' });
+    }
   }
 
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       director: Yup.string().required(),
-      genre: Yup.string().required()
+      genre: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -36,16 +52,15 @@ class MoviesController {
       admin_id: req.userId,
       name,
       director,
-      genre
+      genre,
     });
 
     return res.json(movie);
   }
 
   async vote(req, res) {
-
     const schema = Yup.object().shape({
-      movie_note: Yup.string().required()
+      movie_note: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
