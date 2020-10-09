@@ -15,8 +15,8 @@ class MoviesController {
       });
 
       if (result) {
-         return res.status(200).json(result);
-      } 
+        return res.status(200).json(result);
+      }
 
       const data = await Movie.findAll();
       return res.status(200).json(data);
