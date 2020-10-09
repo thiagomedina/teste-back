@@ -12,7 +12,8 @@ class MoviesController {
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      description: Yup.string().required(),
+      director: Yup.string().required(),
+      genre: Yup.string().required()
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -29,12 +30,13 @@ class MoviesController {
         .json({ error: 'only administrator can register movies' });
     }
 
-    const { name, description } = req.body;
+    const { name, director, genre } = req.body;
 
     const movie = await Movie.create({
       admin_id: req.userId,
       name,
-      description,
+      director,
+      genre
     });
 
     return res.json(movie);

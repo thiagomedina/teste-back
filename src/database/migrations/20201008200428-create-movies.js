@@ -13,12 +13,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      description: {
+      director: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      genre: {
         type: Sequelize.STRING,
         allowNull: false,
       },
       movie_note: {
-        type: Sequelize.DECIMAL(10,2),
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
         defaultValue: 0,
       },

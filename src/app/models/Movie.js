@@ -5,10 +5,10 @@ class Movie extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        description: Sequelize.STRING,
+        director: Sequelize.STRING,
+        genre:Sequelize.STRING,
         movie_note: Sequelize.INTEGER,
         vote_quantity: Sequelize.INTEGER,
-
       },
       {
         sequelize,

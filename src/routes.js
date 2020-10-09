@@ -16,6 +16,8 @@ routes.get('/sessions', SessionController.store);
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
+routes.put('/users/disable', UserController.deactivation);
+
 
 routes.get('/movies', MoviesController.index)
 routes.post('/movies', MoviesController.store);

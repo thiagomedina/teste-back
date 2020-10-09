@@ -18,6 +18,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      status:{
+          type: Sequelize.BOOLEAN,
+          defaultValue: true,
+          allowNull: false,
+        },
       password_hash: {
         type: Sequelize.STRING,
         allowNull: false,

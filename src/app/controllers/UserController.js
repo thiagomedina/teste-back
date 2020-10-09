@@ -4,7 +4,6 @@ import User from '../models/User';
 
 import authConfig from '../../config/auth';
 
-
 class UserController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -14,14 +13,14 @@ class UserController {
         .required(),
       password: Yup.string()
         .required()
-        .min(6,'minimum 6 digits'),
-      admin: Yup.boolean()  
+        .min(6, 'minimum 6 digits'),
+      admin: Yup.boolean(),
     });
 
-   if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' })
-
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
     }
+
     const userExists = await User.findOne({
       where: { email: req.body.email },
     });
@@ -37,7 +36,7 @@ class UserController {
         id,
         name,
         email,
-        admin
+        admin,
       },
       token: jwt.sign({ id }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
@@ -52,7 +51,7 @@ class UserController {
       admin: Yup.boolean(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
-        .min(6,'minimum 6 digits')
+        .min(6, 'minimum 6 digits')
         .when('oldPassword', (oldPassword, field) =>
           oldPassword ? field.required() : field
         ),
@@ -67,9 +66,15 @@ class UserController {
 
     const { email, oldPassword } = req.body;
 
-    const user = await User.findByPk(req.userId);
+    const userActived = await User.findOne({
+      where: { id: req.userId, status: true },
+    });
 
-    if (email && email !== user.email) {
+    if (!userActived) {
+      return res.status(400).json({ error: 'User disabled.' });
+    }
+
+    if (email && email !== userActived.email) {
       const userExists = await User.findOne({
         where: { email },
       });
@@ -83,14 +88,34 @@ class UserController {
       return res.status(401).json({ error: 'Password does not match' });
     }
 
-    const { id, name, admin } = await user.update(req.body);
+    const { id, name, admin } = await userActived.update(req.body);
 
     return res.json({
       id,
       name,
       email,
-      admin
+      admin,
     });
+  }
+
+  async deactivation(req, res) {
+    try {
+      const userActived = await User.findOne({
+        where: { id: req.userId, status: true },
+      });
+
+      if (!userActived) {
+        return res.status(400).json({ error: 'User disabled.' });
+      }
+
+      await userActived.update({
+        status: false,
+      });
+
+      return res.status(200).json('User successfully disabled');
+    } catch (e) {
+      return res.status(401).json( {error:'It was not possible to disable the user, try again'});
+    }
   }
 }
 
