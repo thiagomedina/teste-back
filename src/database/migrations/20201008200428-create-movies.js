@@ -13,21 +13,26 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      description:{
-        type:Sequelize.STRING,
-        allowNull: false
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-      notation:{
-        type:Sequelize.INTEGER,
+      movie_note: {
+        type: Sequelize.DECIMAL(10,2),
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
-      admin_id:{
+      vote_quantity: {
         type: Sequelize.INTEGER,
-         references: {model: 'users', key: 'id'},
-         onUpdate: 'CASCADE',
-         onDelete: 'SET NULL',
-         allowNull: false
+        allowNull: true,
+        defaultValue: 0,
+      },
+      admin_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
@@ -44,4 +49,3 @@ module.exports = {
     return queryInterface.dropTable('movies');
   },
 };
-

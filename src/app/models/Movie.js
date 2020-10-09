@@ -6,7 +6,8 @@ class Movie extends Model {
       {
         name: Sequelize.STRING,
         description: Sequelize.STRING,
-        notation: Sequelize.INTEGER,
+        movie_note: Sequelize.INTEGER,
+        vote_quantity: Sequelize.INTEGER,
 
       },
       {
