@@ -13,15 +13,15 @@
 
 ----
 
-- **`POST /movies`**: A rota cadastra um novo filme recebendo `name` e `description` 
+- **`POST /movies`**: A rota cadastra um novo filme recebendo `name` e `description`<br/> 
 **OBS**: Você precisa estar logado e ser um usuário administrador.
 
 
-- **`GET /movies`**: A Rota retorna todos o filmes cadastrados já com a média de notas do filme.
+- **`GET /movies`**: A Rota retorna todos o filmes cadastrados já com a média de notas do filme.<br/> 
 **OBS**: Você precisa estar logado.
 
 
-- **`PUT /movies/vote/:movie_id`**: A rota recebe seu voto e contabiliza na média do filme, você só precisa passar `movie_note:` com o valor da sua nota.
+- **`PUT /movies/vote/:movie_id`**: A rota recebe seu voto e contabiliza na média do filme, você só precisa passar `id`do filme na url e o `movie_note:` com o valor da sua nota no corpo da requisição. <br/> 
 **OBS**: Você precisa estar logado.
 
 
@@ -48,9 +48,8 @@ Agora, você precisa criar tabelas com o comando:
 yarn sequelize db:migrate
 ```
 Após a configuração do banco de dados, você pode iniciar o servidor com:
-```
+
+```console
 yarn dev
 ```
-
-
 
